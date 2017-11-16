@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></link>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"></link>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#markerform table').DataTable();
+            });
+        </script>
+    </h:head>
+    <h:body class="container">
+         <f:view class="raw col-md-12">
+            <h1>List of stations </h1>
+            <h:form id="markerform">
+                <h:dataTable value="#{vlibApplication.mycarto.markers.marker}" 
+                             var="marker" 
+                             class="table table-striped table-bordered" 
+                             id="markerlist"
+                             binding="#{vlibApplication.datatableMarkers}">
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                        <h:outputText value="#{marker.name}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Number</f:facet>
+                        <h:outputText value="#{marker.number}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Address</f:facet>
+                        <h:outputText value="#{marker.address}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">FullAddress</f:facet>
+                        <h:outputText value="#{marker.fullAddress}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Details</f:facet>
+                        <h:commandLink value="Show" action="#{vlibApplication.show(marker.number)}" />
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>
+
